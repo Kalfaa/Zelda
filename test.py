@@ -86,7 +86,8 @@ class Game:
         for sprite in self.all_sprites:
             self.WINDOW.blit(sprite.image, self.camera.apply(sprite))
         if self.debuglink:
-            pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.rect)) #debug link hitbox
+            pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.rect))
+            pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.monstre.rect))#debug link hitbox
         self.afficher_coeur()
 
         if (self.Link.display):
@@ -189,7 +190,7 @@ class Game:
             self.draw()
     def new(self):
         self.Link = Hero(self , 255/16 , 49/16)
-        self.monstre=Monstre(self, 180/16, 180/16)
+        self.monstre=Monstre(self, 255/16, 180/16)
         self.all_sprites.add(self.Link)
         self.all_sprites.add(self.monstre)
         self.camera = Camera(self.map.largeur*16, self.map.hauteur*16)
