@@ -439,7 +439,7 @@ class Monstre(Perso):
                         self.x_ss = 12
                     else:
                         self.x_ss =41
-                if direction == 1:
+                elif direction == 1:
                     if self.x_ss != 39 or self.x_ss != 12:
                         self.x_ss ==12
                     self.direction = "droite"
@@ -455,7 +455,7 @@ class Monstre(Perso):
                     else:
                         self.x_ss =39
 
-                if direction == 2:
+                elif direction == 2:
                     if self.x_ss != 39  or self.x_ss != 11:
                         self.x_ss ==11
                     self.direction = "bas"
@@ -470,7 +470,7 @@ class Monstre(Perso):
                         self.x_ss = 11
                     else:
                         self.x_ss =39
-                if direction == 3:
+                elif direction == 3:
                     if self.x_ss != 39  or self.x_ss != 12:
                         self.x_ss ==12
                     self.direction = "gauche"
