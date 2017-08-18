@@ -61,7 +61,7 @@ class Hero(Perso):
 
             self.sprite_coeur = game.sprite_coeur
             self.HP_max = 8
-            self.HP_Actuel = 1.5
+            self.HP_Actuel = 6
             self.x_ss = 2
             self.droite = 40
             self.gauche = 103
@@ -94,6 +94,9 @@ class Hero(Perso):
             self.i = 0
             self.direction = "droite"
             self.compteur_animation2 =0
+            self.inventory = [0,0]
+            self.invulnerable = 0
+
     def link_direction(self):
         return self.image
     def clear_animation(self):
@@ -338,6 +341,7 @@ class Hero(Perso):
             self.x+= self.vx
             self.y+= self.vy
             self.rect.topleft = (self.x, self.y)
+        self.mask = pygame.mask.from_surface(self.image)
 
 
 
@@ -373,7 +377,8 @@ class Hero(Perso):
                         self.liste_vivant[y + j][x + i] = self.name
 
 
-
+    def prend_degat(self,val):
+        self.HP_Actuel = self.HP_Actuel - val
 
 
 class Monstre(Perso):
@@ -399,6 +404,7 @@ class Monstre(Perso):
         self.vy = 0
         self.update_2=0
         self.compteur_action = 0
+        self.invulnerable = 0
     def link_direction(self):
         return self.image
     def update(self):
@@ -415,7 +421,7 @@ class Monstre(Perso):
             self.x += self.vx
             self.y += self.vy
             self.rect.topleft = (self.x, self.y)
-
+        self.mask = pygame.mask.from_surface(self.image)
     def deplacer(self, direction):
             now = pygame.time.get_ticks()
             temp = self.rect.copy()
@@ -486,3 +492,6 @@ class Monstre(Perso):
                     else:
                         self.x_ss =39
             self.rect = self.rect.move(self.rect.x, self.rect.y)
+
+    def prend_degat(self,val):
+        self.HP_Actuel = self.HP_Actuel - val

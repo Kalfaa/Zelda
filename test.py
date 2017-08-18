@@ -40,7 +40,7 @@ class Game:
         self.textbox =pygame.image.load('SPRITE/textbox2.png').convert()
         self.mob_ss = SpriteSheet('SPRITE/origin.gif')
 
-
+        self.update_animation = 0
         self.map_image = self.map.make_map()
         self.map_rect = self.map_image.get_rect()
         self.link_ss =SpriteSheet('SPRITE/Link.png')
@@ -54,9 +54,22 @@ class Game:
 
 
     def update(self):
+        now = pygame.time.get_ticks()
         self.Link.update(self.event)
         self.monstre.update()
         self.camera.update(self.Link)
+
+        if (self.Link.invulnerable == 0 ):
+            if (pygame.sprite.collide_mask(self.Link,self.monstre)):
+                self.Link.invulnerable = 1
+                self.Link.prend_degat(0.5)
+
+        else:
+            time = now - self.update_animation
+            print(time)
+            if( time >3000):
+                self.Link.invulnerable = 0
+                self.update_animation = now
 
     def draw(self):
         self.WINDOW.blit(self.map_image, self.camera.apply_rect(self.map_rect))
@@ -82,11 +95,12 @@ class Game:
 
 
         if self.debugwall:
-            self.debug_collision(self.map)             #hitbox de tout les murs présent sur la carte
+            self.debug_collision(self.map)
         for sprite in self.all_sprites:
             self.WINDOW.blit(sprite.image, self.camera.apply(sprite))
         if self.debuglink:
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.rect))
+            pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.sword_rect))
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.monstre.rect))#debug link hitbox
         self.afficher_coeur()
 
@@ -124,7 +138,7 @@ class Game:
         while (self.Link.HP_max >= cpt):
             if temp_HP_Actuel > 0:
                 temp_HP_Actuel -= 1
-                if temp_HP_Actuel > 0:
+                if temp_HP_Actuel+1 > 0:
                     self.heart(1, cpt)
                 if temp_HP_Actuel < 0:
                     self.heart(abs(temp_HP_Actuel), cpt)
@@ -174,7 +188,8 @@ class Game:
                     self.debuglink = True
                 else:
                     self.debuglink = False
-
+            if event.type == KEYDOWN and event.key == K_F10:
+                self.Link.prend_degat(1)
 
             if event.type == pygame.QUIT:
                 if self.playing:
