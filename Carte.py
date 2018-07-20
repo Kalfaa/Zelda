@@ -1,11 +1,9 @@
-import pygame
-from pygame.locals import *
-from pytmx.util_pygame import load_pygame
 import pytmx
 from math import *
 from Interactif import *
 from Item import *
-from Perso import SpriteSheet
+from SpriteSheet import SpriteSheet
+
 
 class Carte:
     def __init__(self,TiledElement,WINDOW):

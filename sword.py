@@ -188,4 +188,4 @@ while continuer:
             
     
                 
-pygame.quit()   
+##pygame.quit()

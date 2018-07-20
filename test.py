@@ -1,5 +1,7 @@
 import pygame
 from pygame.locals import *
+
+from Monstre import Monstre
 from Perso import *
 from Carte import *
 import time
@@ -54,46 +56,21 @@ class Game:
 
 
     def update(self):
+
         now = pygame.time.get_ticks()
-        self.Link.update(self.event)
-        self.monstre.update()
+        self.Link.update(self.event, self.list_monstre, now)
+        for monstre in self.list_monstre:
+            if monstre.checkIfDead():
+                self.list_monstre.remove(monstre)
+                self.all_sprites.remove(monstre)
+            else:
+                monstre.update(now)
         self.camera.update(self.Link)
 
-        if (self.Link.invulnerable == 0 ):
-            if (pygame.sprite.collide_mask(self.Link,self.monstre)):
-                self.Link.invulnerable = 1
-                self.Link.prend_degat(0.5)
-
-        else:
-            time = now - self.update_animation
-            print(time)
-            if( time >3000):
-                self.Link.invulnerable = 0
-                self.update_animation = now
 
     def draw(self):
         self.WINDOW.blit(self.map_image, self.camera.apply_rect(self.map_rect))
-
-        if (self.Link.etats == 'hit'):
-            if (self.Link.compteur_animation == 35):
-                self.Link.etats = 'Free'
-                self.Link.clear_animation()
-                if (self.Link.direction =='droite'):
-                    self.Link.image = self.Link.ss.get_image(self.Link.x_ss, self.Link.droite, self.Link.width, self.Link.height)
-                elif (self.Link.direction =='haut'):
-                    self.Link.image =  self.Link.ss.get_image(self.Link.x_ss, self.Link.haut, self.Link.width, self.Link.height)
-                elif (self.Link.direction =='bas'):
-                    self.Link.image =self.Link.ss.get_image(self.Link.x_ss, self.Link.bas, self.Link.width, self.Link.height)
-                elif (self.Link.direction =='gauche'):
-                    self.Link.image =  self.Link.ss.get_image(self.Link.x_ss, self.Link.gauche, self.Link.width, self.Link.height)
-            else:
-                self.Link.sword_display = pygame.transform.rotate(self.Link.sword, self.Link.i)
-                self.WINDOW.blit(self.Link.sword_display , self.camera.apply_rect(self.Link.sword_rect))
-
-
-
-
-
+        self.Link.draw(self.WINDOW,self.camera)
         if self.debugwall:
             self.debug_collision(self.map)
         for sprite in self.all_sprites:
@@ -103,8 +80,7 @@ class Game:
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.sword_rect))
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.monstre.rect))#debug link hitbox
         self.afficher_coeur()
-
-        if (self.Link.display):
+        if self.Link.display:
             self.Link.etats = 'Talk'
             self.WINDOW.blit(self.textbox, (30, 180))
             self.WINDOW.blit(self.Link.interactif.inside.image, self.camera.apply(self.Link.interactif.inside)) ## FAUT TROUVER UNE SOLUTION CAR CA CEST DE LA MERDE
@@ -204,10 +180,12 @@ class Game:
             self.update()
             self.draw()
     def new(self):
+        self.list_monstre = list()
         self.Link = Hero(self , 255/16 , 49/16)
-        self.monstre=Monstre(self, 255/16, 180/16)
+        self.list_monstre.append(Monstre(self, 255/16, 180/16))
         self.all_sprites.add(self.Link)
-        self.all_sprites.add(self.monstre)
+        for monstre in self.list_monstre:
+            self.all_sprites.add(monstre)
         self.camera = Camera(self.map.largeur*16, self.map.hauteur*16)
         self.map.afficher_tab(self.map.list_item)
         for item in self.map.item:
@@ -218,7 +196,6 @@ class Game:
             if obj.name != None:
                 rect = pygame.Rect(obj.x,obj.y, obj.width , obj.height )
                 pygame.draw.rect(self.WINDOW , pygame.Color("green") , self.camera.apply_rect(rect))
-
 
 
 g = Game()
