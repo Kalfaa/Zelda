@@ -1,5 +1,5 @@
-
 from Interactif import *
+
 
 class Perso(pygame.sprite.Sprite):
     liste_vivant = list()
@@ -113,17 +113,17 @@ class Hero(Perso):
                         self.sword_rect.x = self.sword_rect.x + 13 - (self.compteur_animation * 0.80)
                         self.sword_rect.y = self.sword_rect.y - 9 - (self.compteur_animation * 0.50)
                     elif 16 < self.compteur_animation < 22:
-                        self.sword_rect.x = self.sword_rect.x - ((self.compteur_animation - 16) * 2)
-                        self.sword_rect.y = self.sword_rect.y - 13
+                        self.sword_rect.x -= (self.compteur_animation - 16) * 2
+                        self.sword_rect.y -= 13
                     elif 21 < self.compteur_animation < 29:
-                        self.sword_rect.x = self.sword_rect.x - 12
+                        self.sword_rect.x -= 12
                         self.sword_rect.y = self.sword_rect.y - 13 + (self.compteur_animation - 21)
                     elif 28 < self.compteur_animation < 35:
-                        self.sword_rect.x = self.sword_rect.x - 12
-                        self.sword_rect.y = self.sword_rect.y + 3
+                        self.sword_rect.x -= 12
+                        self.sword_rect.y += 3
                     elif self.compteur_animation == 35:
-                        self.sword_rect.x = self.sword_rect.x + 13
-                        self.sword_rect.y = self.sword_rect.y - 7
+                        self.sword_rect.x += 13
+                        self.sword_rect.y -= 7
 
                     self.i = self.i_h
             elif self.direction == "droite":
@@ -220,8 +220,6 @@ class Hero(Perso):
                     if self.x_ss == 290 and self.gauche == 230:
                         self.x_ss = 2
                         self.gauche = 103
-
-
                 elif keys[pygame.K_RIGHT]:
                     self.direction = "droite"
                     temp = temp.move(+self.vitesse, 0)
@@ -371,5 +369,6 @@ class Hero(Perso):
             else:
                 self.sword_display = pygame.transform.rotate(self.sword, self.i)
                 window.blit(self.sword_display, camera.apply_rect(self.sword_rect))
+
     def checkIfDead(self):
         return self.HP_Actuel <= 0
