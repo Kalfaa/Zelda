@@ -45,7 +45,6 @@ class Monstre(Perso):
             if time > 3000:
                 self.invulnerable = 0
                 self.invulnerable_update = now
-        now = pygame.time.get_ticks()
         if now - self.update_2 > 450:
             self.update_2 = now
             if self.compteur_action == 0:
@@ -80,7 +79,6 @@ class Monstre(Perso):
                 self.direction = "droite"
                 temp = temp.move(+self.vitesse, 0)
                 self.image = self.ss.get_image(self.x_ss, self.droite, self.rect.width, self.rect.height)
-
                 self.vx = self.game.map.wall_collision(temp, 'droite', self.vitesse)
                 self.rect = temp
                 print(self.x_ss)
@@ -92,11 +90,8 @@ class Monstre(Perso):
                 self.direction = "bas"
                 temp = temp.move(0, +self.vitesse)
                 self.image = self.ss.get_image(self.x_ss, self.bas, self.rect.width, self.rect.height)
-
                 self.vy = self.game.map.wall_collision(temp, 'bas', self.vitesse)
-
                 self.rect = temp
-
                 if self.x_ss == 39:
                     self.x_ss = 11
                 else:
