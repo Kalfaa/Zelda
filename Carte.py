@@ -2,6 +2,7 @@ import pytmx
 from math import *
 from Interactif import *
 from Item import *
+from Obstacle import Obstacle
 from SpriteSheet import SpriteSheet
 
 
@@ -33,10 +34,6 @@ class Carte:
             print(liste[i])
 
     def ajouter_obstacle(self,Rect):
-        ##if (Rect.y+Rect.height >self.hauteur*16):
-            ##raise ('Hauteur plus grande que la carte ' )
-        ##if (Rect.y+Rect.width >self.largeur*16):
-            ##raise ('Largeur plus grande que la carte')
         x = int(Rect.x)//16
         y = int(Rect.y)//16
         width = ceil(Rect.width)
@@ -101,47 +98,47 @@ class Carte:
             posy = Rect1.y
             posx = Rect1.x
 
-            WALL_HG = self.liste_wall[(posy) // 16][posx // 16]  #Haut Gauche
-            WALL_HD = self.liste_wall[(posy) // 16][(posx+Rect1.width) // 16] #Haut Droite
+            wall_hg = self.liste_wall[(posy) // 16][posx // 16]  #Haut Gauche
+            wall_hd = self.liste_wall[(posy) // 16][(posx+Rect1.width) // 16] #Haut Droite
             if ((posx + Rect1.width) - (posx))>16:
-                WALL_HGHD= self.liste_wall[(posy) // 16][(posx+Rect1.width-16) // 16]
-                for Wall in WALL_HGHD:
+                wall_hghd= self.liste_wall[(posy) // 16][(posx+Rect1.width-16) // 16]
+                for Wall in wall_hghd:
                     if isinstance(Wall, Obstacle):
                         if Rect1.colliderect(Wall):
                             list_coin.append(Wall)
             if ((posy+Rect1.height) - (posy))>16:
-                WALL_BDHD = self.liste_wall[((posy+Rect1.height)-16) // 16][(posx+Rect1.width) // 16]
-                for Wall in WALL_BDHD:
+                wall_bdhd = self.liste_wall[((posy+Rect1.height)-16) // 16][(posx+Rect1.width) // 16]
+                for Wall in wall_bdhd:
                     if isinstance(Wall, Obstacle):
                         if Rect1.colliderect(Wall):
                             list_coin.append(Wall)
             if (posy+Rect1.height - (posy))>16:
-                WALL_HGBG= self.liste_wall[((posy+Rect1.height)-16) // 16][(posx) // 16]
-                for Wall in WALL_HGBG:
+                wall_hgbg= self.liste_wall[((posy+Rect1.height)-16) // 16][(posx) // 16]
+                for Wall in wall_hgbg:
                     if isinstance(Wall, Obstacle):
                         if Rect1.colliderect(Wall):
                             list_coin.append(Wall)
-            WALL_BG = self.liste_wall[(posy+Rect1.height) // 16][(posx) // 16] #Bas Gauche
-            WALL_BD = self.liste_wall[(posy+Rect1.height) // 16][(posx+Rect1.width) // 16]#Bas droite
+            wall_bg = self.liste_wall[(posy+Rect1.height) // 16][(posx) // 16] #Bas Gauche
+            wall_bd = self.liste_wall[(posy+Rect1.height) // 16][(posx+Rect1.width) // 16]#Bas droite
             if ((posx+Rect1.width)-posx) >16:
-                WALL_BDBG=self.liste_wall[(posy+Rect1.height) // 16][((posx+Rect1.width)-16) // 16]
-                for Wall in WALL_BDBG:
+                wall_bdbg=self.liste_wall[(posy+Rect1.height) // 16][((posx+Rect1.width)-16) // 16]
+                for Wall in wall_bdbg:
                     if isinstance(Wall,Obstacle):
                         if Rect1.colliderect(Wall):
                             list_coin.append(Wall)
-            for Wall in WALL_HG:
+            for Wall in wall_hg:
                 if isinstance(Wall, Obstacle):
                     if Rect1.colliderect(Wall):
                         list_coin.append(Wall)
-            for Wall in WALL_BD:
+            for Wall in wall_bd:
                 if isinstance(Wall, Obstacle):
                     if Rect1.colliderect(Wall):
                         list_coin.append(Wall)
-            for Wall in WALL_BG:
+            for Wall in wall_bg:
                 if isinstance(Wall, Obstacle):
                     if Rect1.colliderect(Wall):
                         list_coin.append(Wall)
-            for Wall in WALL_HD:
+            for Wall in wall_hd:
                 if isinstance(Wall, Obstacle):
                     if Rect1.colliderect(Wall):
                         list_coin.append(Wall)
@@ -200,32 +197,7 @@ class Carte:
 
 
 
-class Obstacle(pygame.Rect):
-    def __init__(self,Rect):
-        self.name= Rect.name
-        self.y = Rect.y
-        self.x = Rect.x
-        self.height = Rect.height
-        self.width  = Rect.width
-        self.rotation =Rect.rotation
-class Camera:
-    def __init__(self,width,height):
-        self.camera = pygame.Rect(0,0,width,height)
-        self.width = width
-        self.height = height
 
-    def apply(self, entity):
-        return entity.rect.move(self.camera.topleft)
-    def apply_rect(self,rect):
-        return rect.move(self.camera.topleft)
-    def update(self , target):
-        x = -target.rect.centerx+int(450/2)
-        y = -target.rect.centery+int(320/2)
-        x=min(0,x)
-        y=min(0,y)
-        x = max(-(self.width - 450),x)
-        y = max(-(self.height - 320 ),y)
-        self.camera = pygame.Rect(x, y, self.width, self.height)
 #map = Carte(load_pygame('sans-titre.tmx'),WINDOW)
 
 #map.afficher_tab()

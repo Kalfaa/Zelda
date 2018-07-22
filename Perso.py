@@ -198,7 +198,6 @@ class Hero(Perso):
                         self.compteur_animation = 35
             return 0
 
-
         elif self.etats == 'Free':
             self.vx, self.vy = 0, 0
             keys = pygame.key.get_pressed()
@@ -271,15 +270,12 @@ class Hero(Perso):
                         self.x_ss = 2
                         self.bas = 71
 
-
-
-
         elif self.etats == 'Talk':
             for event in events:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         pygame.key.set_repeat(400, 50)
-                        if (self.count < len(self.converted_text)):
+                        if self.count < len(self.converted_text):
                             self.display = self.converted_text[self.count]
                             self.count += 1
 
@@ -347,9 +343,9 @@ class Hero(Perso):
         self.liste_vivant[y][x] = self.name
         rajout_ligne_y = 0
         rajout_ligne_x = 0
-        if ((self.rect.y + self.rect.height) % 16 != 0):
+        if (self.rect.y + self.rect.height) % 16 != 0:
             rajout_ligne_y = 1
-        if ((self.rect.x + self.rect.width) % 16 != 0):
+        if (self.rect.x + self.rect.width) % 16 != 0:
             rajout_ligne_x = 1
         for j in range(int(self.rect.height // 16 + rajout_ligne_y)):
             self.liste_vivant[y][x] = self.name
@@ -360,18 +356,20 @@ class Hero(Perso):
         self.HP_Actuel = self.HP_Actuel - val
 
     def draw(self, window, camera):
-        if (self.etats == 'hit'):
-            if (self.compteur_animation == 35):
+        if self.etats == 'hit':
+            if self.compteur_animation == 35:
                 self.etats = 'Free'
                 self.clear_animation()
-                if (self.direction == 'droite'):
+                if self.direction == 'droite':
                     self.image = self.ss.get_image(self.x_ss, self.droite, self.width, self.height)
-                elif (self.direction == 'haut'):
+                elif self.direction == 'haut':
                     self.image = self.ss.get_image(self.x_ss, self.haut, self.width, self.height)
-                elif (self.direction == 'bas'):
+                elif self.direction == 'bas':
                     self.image = self.ss.get_image(self.x_ss, self.bas, self.width, self.height)
-                elif (self.direction == 'gauche'):
+                elif self.direction == 'gauche':
                     self.image = self.ss.get_image(self.x_ss, self.gauche, self.width, self.height)
             else:
                 self.sword_display = pygame.transform.rotate(self.sword, self.i)
                 window.blit(self.sword_display, camera.apply_rect(self.sword_rect))
+    def checkIfDead(self):
+        return self.HP_Actuel <= 0

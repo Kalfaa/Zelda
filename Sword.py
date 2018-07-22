@@ -1,1 +1,2 @@
-Class sword
+class Sword:
+    pass
