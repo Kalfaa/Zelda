@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1b0a30f-80e8-468d-a1d7-25ab53b07a0b" name="Default" comment="Modification des hitsboxs tiled">
-      <change afterPath="$PROJECT_DIR$/malaise.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ZELDA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ZELDA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a1b0a30f-80e8-468d-a1d7-25ab53b07a0b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sword.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sword.py" afterDir="false" />
     </list>
@@ -29,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/Sword.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+              <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -37,11 +34,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Perso.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Perso.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Perso.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="408">
+              <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Monstre.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Monstre.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1060">
+              <caret line="95" column="34" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Carte.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Carte.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1224">
+              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
@@ -49,7 +67,7 @@
       <file leaf-file-name="test_damien.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_damien.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
+            <state relative-caret-position="448">
               <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -81,10 +99,10 @@
         <option value="$PROJECT_DIR$/Item.py" />
         <option value="$PROJECT_DIR$/Interactif.py" />
         <option value="$PROJECT_DIR$/sword.py" />
-        <option value="$PROJECT_DIR$/Carte.py" />
         <option value="$PROJECT_DIR$/Perso.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/test_damien.py" />
+        <option value="$PROJECT_DIR$/Carte.py" />
       </list>
     </option>
   </component>
@@ -114,7 +132,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test_damien.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Game.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -135,7 +153,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_damien">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="ZELDA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,7 +166,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -234,7 +252,28 @@
       <option name="project" value="LOCAL" />
       <updated>1497703323161</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Modification des hitsboxs tiled">
+      <created>1532271353535</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532271353535</updated>
+    </task>
+    <task id="LOCAL-00003" summary="reformat code">
+      <created>1532272099420</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1532272099420</updated>
+    </task>
+    <task id="LOCAL-00004" summary="malaise game">
+      <created>1532272133974</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1532272133974</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -275,9 +314,10 @@
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11169861" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.39404762" side_tool="true" weight="0.36887923" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6059524" visible="true" weight="0.26136363" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.3296" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.15056819" />
       <window_info anchor="bottom" id="Python Console" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="9" />
@@ -343,7 +383,9 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Modification des hitsboxs tiled" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modification des hitsboxs tiled" />
+    <MESSAGE value="reformat code" />
+    <MESSAGE value="malaise game" />
+    <option name="LAST_COMMIT_MESSAGE" value="malaise game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -373,11 +415,6 @@
           <line>192</line>
           <option name="timeStamp" value="187" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -404,7 +441,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/Carte.py" />
     <entry file="file://$PROJECT_DIR$/Perso.py" />
     <entry file="file://$PROJECT_DIR$/test.py" />
@@ -461,22 +497,28 @@
     <entry file="file://C:/Python34/Lib/site-packages/pygame/sprite.py" />
     <entry file="file://C:/Python34/Lib/codecs.py" />
     <entry file="file://$PROJECT_DIR$/Item.py" />
-    <entry file="file://$PROJECT_DIR$/Carte.py" />
     <entry file="file://$PROJECT_DIR$/Interactif.py" />
     <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/Sword.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Perso.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_damien.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
+        <state relative-caret-position="448">
           <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -484,10 +526,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Perso.py">
+    <entry file="file://$PROJECT_DIR$/Monstre.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        <state relative-caret-position="1060">
+          <caret line="95" column="34" selection-start-line="95" selection-start-column="34" selection-end-line="95" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Carte.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
         </state>
       </provider>
     </entry>
