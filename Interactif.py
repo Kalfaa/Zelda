@@ -2,7 +2,7 @@ import pygame
 
 
 class Interactif(pygame.sprite.Sprite):
-    def __init__(self,obj,sprite):
+    def __init__(self, obj, sprite):
         pygame.sprite.Sprite.__init__(self)
         self.nom_item = obj.name
         self.image = sprite
@@ -17,16 +17,16 @@ class Interactif(pygame.sprite.Sprite):
 
 
 class Coffre(Interactif):
-    def __init__(self,obj,sprite,item):
-        Interactif.__init__(self,obj,sprite)
+    def __init__(self, obj, sprite, item):
+        Interactif.__init__(self, obj, sprite)
         self.etats = 'Close'
         self.text = "Voici votre epee ! | Appuyer sur espace pour taper ! "
         self.inside = item
 
-    def change_etats(self,etats):
+    def change_etats(self, etats):
         self.etats = etats
 
-    def changer_sprite(self,sprite):
+    def changer_sprite(self, sprite):
         self.image = sprite
 
     def action(self):

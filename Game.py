@@ -86,8 +86,7 @@ class Game:
         if self.Link.display:
             self.Link.etats = 'Talk'
             self.WINDOW.blit(self.textbox, (30, 180))
-            self.WINDOW.blit(self.Link.interactif.inside.image, self.camera.apply(
-                self.Link.interactif.inside))
+            self.WINDOW.blit(self.Link.interactif.inside.image, self.camera.apply(self.Link.interactif.inside))
             self.afficher_text(self.Link.display)
 
         pygame.display.flip()

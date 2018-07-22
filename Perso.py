@@ -142,9 +142,9 @@ class Hero(Perso):
                         self.compteur_animation2 = 2
                     elif self.compteur_animation > 27:
                         self.compteur_animation2 = -2
-                    self.image = pygame.transform.flip(self.ss2.get_image(
-                        388 + (self.compteur_animation // 4 * 32) - self.compteur_animation2, 350, 20, 28),
-                        1, 0)
+                    self.image = pygame.transform.flip(
+                        self.ss2.get_image(388 + (self.compteur_animation // 4 * 32) - self.compteur_animation2, 350,
+                            20, 28), 1, 0)
                     if 0 < self.compteur_animation < 18:
                         self.sword_rect.x = self.sword_rect.x + 10 + int(self.compteur_animation * 0.40)
                         self.sword_rect.y = self.sword_rect.y - 12 + int(self.compteur_animation * 0.70)
