@@ -62,14 +62,11 @@ class Monstre(Perso):
     def deplacer(self, direction):
         now = pygame.time.get_ticks()
         temp = self.rect.copy()
-
         if now - self.update_animation > 45:
             self.update_animation = now
             self.vx = 0
             self.vy = 0
             if direction == 4:
-                if self.x_ss != 41 or self.x_ss != 12:
-                    self.x_ss == 12
                 self.direction = "haut"
                 temp = temp.move(0, -self.vitesse)
                 self.image = self.ss.get_image(self.x_ss, self.haut, self.rect.width, self.rect.height)
@@ -80,8 +77,6 @@ class Monstre(Perso):
                 else:
                     self.x_ss = 41
             elif direction == 1:
-                if self.x_ss != 39 or self.x_ss != 12:
-                    self.x_ss == 12
                 self.direction = "droite"
                 temp = temp.move(+self.vitesse, 0)
                 self.image = self.ss.get_image(self.x_ss, self.droite, self.rect.width, self.rect.height)
@@ -93,10 +88,7 @@ class Monstre(Perso):
                     self.x_ss = 12
                 else:
                     self.x_ss = 39
-
             elif direction == 2:
-                if self.x_ss != 39 or self.x_ss != 11:
-                    self.x_ss == 11
                 self.direction = "bas"
                 temp = temp.move(0, +self.vitesse)
                 self.image = self.ss.get_image(self.x_ss, self.bas, self.rect.width, self.rect.height)
@@ -110,14 +102,11 @@ class Monstre(Perso):
                 else:
                     self.x_ss = 39
             elif direction == 3:
-                if self.x_ss != 39 or self.x_ss != 12:
-                    self.x_ss == 12
                 self.direction = "gauche"
                 temp = temp.move(-self.vitesse, 0)
                 self.image = self.ss.get_image(self.x_ss, self.gauche, self.rect.width, self.rect.height)
                 self.vx = -self.game.map.wall_collision(temp, 'gauche', self.vitesse)
                 self.rect = temp
-
                 if self.x_ss == 39:
                     self.x_ss = 12
                 else:
