@@ -24,7 +24,7 @@ class Game:
         self.map = False
         self.textbox = False
         self.mob_ss = False
-        self.sprite_coeur = list()
+        self.sprite_heart = list()
         self.update_animation = 0
         self.map_image = False
         self.map_rect = False
@@ -36,12 +36,12 @@ class Game:
         self.load_data()
 
     def load_data(self):
-        self.sprite_coeur = list()
-        self.sprite_coeur.append(pygame.image.load('SPRITE/Heart00.png').convert())
-        self.sprite_coeur.append(pygame.image.load('SPRITE/Heart025.png').convert())
-        self.sprite_coeur.append(pygame.image.load('SPRITE/Heart05.png').convert())
-        self.sprite_coeur.append(pygame.image.load('SPRITE/Heart075.png').convert())
-        self.sprite_coeur.append(pygame.image.load('SPRITE/Heart1.png').convert())
+        self.sprite_heart = list()
+        self.sprite_heart.append(pygame.image.load('SPRITE/Heart00.png').convert())
+        self.sprite_heart.append(pygame.image.load('SPRITE/Heart025.png').convert())
+        self.sprite_heart.append(pygame.image.load('SPRITE/Heart05.png').convert())
+        self.sprite_heart.append(pygame.image.load('SPRITE/Heart075.png').convert())
+        self.sprite_heart.append(pygame.image.load('SPRITE/Heart1.png').convert())
         self.map = Carte(load_pygame('Grande_map.tmx'), self.WINDOW)
         self.textbox = pygame.image.load('SPRITE/textbox2.png').convert()
         self.mob_ss = SpriteSheet('SPRITE/origin.gif')
@@ -53,7 +53,7 @@ class Game:
         font_path = "SPRITE/ReturnofGanon.ttf"
         font_size = 32
         self.font = pygame.font.Font(font_path, font_size)
-        for obj in self.sprite_coeur:
+        for obj in self.sprite_heart:
             obj.set_colorkey((255, 255, 255))
 
     def update(self):
@@ -93,19 +93,19 @@ class Game:
 
     def heart(self, remplissage, position):
         if remplissage == 0:
-            self.WINDOW.blit(self.sprite_coeur[0], (450 - (self.Link.HP_max - position) * 32, 0))
+            self.WINDOW.blit(self.sprite_heart[0], (450 - (self.Link.HP_max - position) * 32, 0))
             return True
         if remplissage == 0.25:
-            self.WINDOW.blit(self.sprite_coeur[1], (450 - (self.Link.HP_max - position) * 32, 0))
+            self.WINDOW.blit(self.sprite_heart[1], (450 - (self.Link.HP_max - position) * 32, 0))
             return True
         if remplissage == 0.5:
-            self.WINDOW.blit(self.sprite_coeur[2], (450 - (self.Link.HP_max - position) * 32, 0))
+            self.WINDOW.blit(self.sprite_heart[2], (450 - (self.Link.HP_max - position) * 32, 0))
             return True
         if remplissage == 0.75:
-            self.WINDOW.blit(self.sprite_coeur[3], (450 - (self.Link.HP_max - position) * 32, 0))
+            self.WINDOW.blit(self.sprite_heart[3], (450 - (self.Link.HP_max - position) * 32, 0))
             return True
         if remplissage == 1:
-            self.WINDOW.blit(self.sprite_coeur[4], (450 - (self.Link.HP_max - position) * 32, 0))
+            self.WINDOW.blit(self.sprite_heart[4], (450 - (self.Link.HP_max - position) * 32, 0))
             return True
 
     def afficher_coeur(self):

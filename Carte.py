@@ -99,7 +99,7 @@ class Carte:
         posy = rect1.y
         posx = rect1.x
 
-        wall_hg = self.list_wall[(posy) // 16][posx // 16]  # Haut Gauche
+        wall_hg = self.list_wall[(posy) // 16][posx // 16]  # up Gauche
         wall_hd = self.list_wall[(posy) // 16][(posx + rect1.width) // 16]  # Haut Droite
         wall_bg = self.list_wall[(posy + rect1.height) // 16][(posx) // 16]  # Bas Gauche
         wall_bd = self.list_wall[(posy + rect1.height) // 16][(posx + rect1.width) // 16]  # Bas droite
@@ -147,7 +147,7 @@ class Carte:
         liste_espace = []
         if len(list_coin) == 0:
             return vitesse
-        if direction == 'droite':
+        if direction == 'right':
             rect1 = rect1.move(-vitesse, 0)
             for Wall in list_coin:
                 espace = Wall.x - (rect1.x + rect1.width)
@@ -155,7 +155,7 @@ class Carte:
             espace_min = min(liste_espace)
 
             return espace_min
-        if direction == 'haut':
+        if direction == 'up':
             rect1 = rect1.move(0, +vitesse)
             for Wall in list_coin:
                 espace = (rect1.y) - (Wall.y + Wall.height)
@@ -163,7 +163,7 @@ class Carte:
             espace_min = min(liste_espace)
 
             return espace_min
-        if direction == 'gauche':
+        if direction == 'left':
             rect1 = rect1.move(+vitesse, 0)
             for Wall in list_coin:
                 espace = (rect1.x) - (Wall.x + Wall.width)
@@ -171,7 +171,7 @@ class Carte:
             espace_min = min(liste_espace)
 
             return espace_min
-        if direction == 'bas':
+        if direction == 'down':
             rect1 = rect1.move(0, -vitesse)
             for Wall in list_coin:
                 espace = (Wall.y) - (rect1.y + rect1.height)

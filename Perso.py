@@ -28,23 +28,23 @@ class Perso(pygame.sprite.Sprite):
 class Hero(Perso):
     def __init__(self, game, x, y):
         Perso.__init__(self, game, x, y)
-        self.sprite_coeur = game.sprite_coeur
+        self.sprite_heart = game.sprite_heart
         self.HP_max = 8
         self.HP_Actuel = 6
         self.x_ss = 2
-        self.droite = 40
-        self.gauche = 103
-        self.bas = 71
-        self.haut = 8
+        self.right = 40
+        self.left = 103
+        self.down = 71
+        self.up = 8
         self.width = 18
         self.height = 24
         self.ss = game.link_ss
         self.ss2 = game.link_ss2
-        self.image = self.ss.get_image(self.x_ss, self.droite, self.width, self.height)
+        self.image = self.ss.get_image(self.x_ss, self.right, self.width, self.height)
         self.offset = 24
         self.rect = self.image.get_rect()
         self.rect2 = self.image.get_rect()
-        self.ajouter_vivant()
+        self.add_alive()
         self.x = x * 16
         self.y = y * 16
         self.etats = 'Free'
@@ -61,7 +61,7 @@ class Hero(Perso):
         self.i_g = 0
         self.i_d = 0
         self.i = 0
-        self.direction = "droite"
+        self.direction = "right"
         self.compteur_animation2 = 0
         self.inventory = list()
         self.invulnerable = 0
@@ -101,7 +101,7 @@ class Hero(Perso):
                             self.etats = 'hit'
 
         if self.etats == 'hit':
-            if self.direction == "haut":
+            if self.direction == "up":
                 if now - self.update_animation > 5:
                     self.update_animation = now
                     self.sword_rect = self.sword_display.get_rect()
@@ -126,7 +126,7 @@ class Hero(Perso):
                         self.sword_rect.y -= 7
 
                     self.i = self.i_h
-            elif self.direction == "droite":
+            elif self.direction == "right":
                 if now - self.update_animation > 5:
                     self.update_animation = now
 
@@ -153,7 +153,7 @@ class Hero(Perso):
                         self.sword_rect.y = self.sword_rect.y - 12 + int(self.compteur_animation * 0.60 + 2)
 
                     self.i = self.i_d
-            elif self.direction == "bas":
+            elif self.direction == "down":
                 if now - self.update_animation > 5:
                     self.update_animation = now
                     self.image = self.ss2.get_image(16 + (self.compteur_animation // 4 * 32), 348, 16, 24)
@@ -169,7 +169,7 @@ class Hero(Perso):
                         self.sword_rect.x = self.sword_rect.x - 11 + int(self.compteur_animation * 0.80)
                         self.sword_rect.y = self.sword_rect.y + 2 + int(-self.compteur_animation * 0.30 + 14)
                     self.i = self.i_b
-            elif self.direction == "gauche":
+            elif self.direction == "left":
                 if now - self.update_animation > 5:
                     self.update_animation = now
 
@@ -206,67 +206,67 @@ class Hero(Perso):
             if now - self.update_animation > 45:
                 self.update_animation = now
                 if keys[pygame.K_LEFT]:
-                    self.direction = "gauche"
+                    self.direction = "left"
                     temp = temp.move(-self.vitesse, 0)
-                    self.image = self.ss.get_image(self.x_ss, self.gauche, self.rect2.width, self.rect2.height)
+                    self.image = self.ss.get_image(self.x_ss, self.left, self.rect2.width, self.rect2.height)
                     self.x_ss += self.offset
 
-                    self.vx = -self.game.map.wall_collision(temp, 'gauche', self.vitesse)
+                    self.vx = -self.game.map.wall_collision(temp, 'left', self.vitesse)
                     self.rect = temp
 
-                    if self.x_ss == 290 and self.gauche == 103:
+                    if self.x_ss == 290 and self.left == 103:
                         self.x_ss = 2
-                        self.gauche = 230
-                    if self.x_ss == 290 and self.gauche == 230:
+                        self.left = 230
+                    if self.x_ss == 290 and self.left == 230:
                         self.x_ss = 2
-                        self.gauche = 103
+                        self.left = 103
                 elif keys[pygame.K_RIGHT]:
-                    self.direction = "droite"
+                    self.direction = "right"
                     temp = temp.move(+self.vitesse, 0)
-                    self.image = self.ss.get_image(self.x_ss, self.droite, self.rect2.width, self.rect2.height)
+                    self.image = self.ss.get_image(self.x_ss, self.right, self.rect2.width, self.rect2.height)
                     self.x_ss += self.offset
 
-                    self.vx = self.game.map.wall_collision(temp, 'droite', self.vitesse)
+                    self.vx = self.game.map.wall_collision(temp, 'right', self.vitesse)
                     self.rect = temp
 
-                    if self.x_ss == 290 and self.droite == 40:
+                    if self.x_ss == 290 and self.right == 40:
                         self.x_ss = 2
-                        self.droite = 167
-                    if self.x_ss == 290 and self.droite == 167:
+                        self.right = 167
+                    if self.x_ss == 290 and self.right == 167:
                         self.x_ss = 2
-                        self.droite = 40
+                        self.right = 40
 
                 elif keys[pygame.K_UP]:
-                    self.direction = "haut"
+                    self.direction = "up"
                     temp = temp.move(0, -self.vitesse)
-                    self.image = self.ss.get_image(self.x_ss, self.haut, self.rect2.width, self.rect2.height)
+                    self.image = self.ss.get_image(self.x_ss, self.up, self.rect2.width, self.rect2.height)
                     self.x_ss += self.offset
 
-                    self.vy = -self.game.map.wall_collision(temp, 'haut', self.vitesse)
+                    self.vy = -self.game.map.wall_collision(temp, 'up', self.vitesse)
                     self.rect = temp
 
-                    if self.x_ss == 290 and self.haut == 8:
+                    if self.x_ss == 290 and self.up == 8:
                         self.x_ss = 2
-                        self.haut = 135
-                    if self.x_ss == 290 and self.haut == 135:
+                        self.up = 135
+                    if self.x_ss == 290 and self.up == 135:
                         self.x_ss = 2
-                        self.haut = 8
+                        self.up = 8
 
                 elif keys[pygame.K_DOWN]:
-                    self.direction = "bas"
+                    self.direction = "down"
                     temp = temp.move(0, +self.vitesse)
-                    self.image = self.ss.get_image(self.x_ss, self.bas, self.rect2.width, self.rect2.height)
+                    self.image = self.ss.get_image(self.x_ss, self.down, self.rect2.width, self.rect2.height)
                     self.x_ss += self.offset
-                    self.vy = self.game.map.wall_collision(temp, 'bas', self.vitesse)
+                    self.vy = self.game.map.wall_collision(temp, 'down', self.vitesse)
 
                     self.rect = temp
 
-                    if self.x_ss == 290 and self.bas == 71:
+                    if self.x_ss == 290 and self.down == 71:
                         self.x_ss = 2
-                        self.bas = 198
-                    if self.x_ss == 290 and self.bas == 198:
+                        self.down = 198
+                    if self.x_ss == 290 and self.down == 198:
                         self.x_ss = 2
-                        self.bas = 71
+                        self.down = 71
 
         elif self.etats == 'Talk':
             for event in events:
@@ -281,7 +281,7 @@ class Hero(Perso):
                             self.display = False
                             self.etats = "Free"
                             self.converted_text = False
-                            self.image = self.ss.get_image(self.x_ss, self.haut, self.width, self.height)
+                            self.image = self.ss.get_image(self.x_ss, self.up, self.width, self.height)
                             return True
 
     def split_texte(self, text):
@@ -322,20 +322,20 @@ class Hero(Perso):
         self.mask = pygame.mask.from_surface(self.image)
 
     def stop(self, direction):
-        if direction == 'droite':
+        if direction == 'right':
             self.x_ss = 2
-            self.image = self.ss.get_image(self.x_ss, self.droite, self.rect2.width, self.rect2.height)
-        if direction == 'haut':
+            self.image = self.ss.get_image(self.x_ss, self.right, self.rect2.width, self.rect2.height)
+        if direction == 'up':
             self.x_ss = 2
-            self.image = self.ss.get_image(self.x_ss, self.haut, self.rect2.width, self.rect2.height)
-        if direction == 'bas':
+            self.image = self.ss.get_image(self.x_ss, self.up, self.rect2.width, self.rect2.height)
+        if direction == 'down':
             self.x_ss = 2
-            self.image = self.ss.get_image(self.x_ss, self.bas, self.rect2.width, self.rect2.height)
-        if direction == 'gauche':
+            self.image = self.ss.get_image(self.x_ss, self.down, self.rect2.width, self.rect2.height)
+        if direction == 'left':
             self.x_ss = 2
-            self.image = self.ss.get_image(self.x_ss, self.gauche, self.rect2.width, self.rect2.height)
+            self.image = self.ss.get_image(self.x_ss, self.left, self.rect2.width, self.rect2.height)
 
-    def ajouter_vivant(self):
+    def add_alive(self):
         x = int(self.rect.x) // 16
         y = int(self.rect.y) // 16
         self.liste_vivant[y][x] = self.name
@@ -358,14 +358,14 @@ class Hero(Perso):
             if self.compteur_animation == 35:
                 self.etats = 'Free'
                 self.clear_animation()
-                if self.direction == 'droite':
-                    self.image = self.ss.get_image(self.x_ss, self.droite, self.width, self.height)
-                elif self.direction == 'haut':
-                    self.image = self.ss.get_image(self.x_ss, self.haut, self.width, self.height)
-                elif self.direction == 'bas':
-                    self.image = self.ss.get_image(self.x_ss, self.bas, self.width, self.height)
-                elif self.direction == 'gauche':
-                    self.image = self.ss.get_image(self.x_ss, self.gauche, self.width, self.height)
+                if self.direction == 'right':
+                    self.image = self.ss.get_image(self.x_ss, self.right, self.width, self.height)
+                elif self.direction == 'up':
+                    self.image = self.ss.get_image(self.x_ss, self.up, self.width, self.height)
+                elif self.direction == 'down':
+                    self.image = self.ss.get_image(self.x_ss, self.down, self.width, self.height)
+                elif self.direction == 'left':
+                    self.image = self.ss.get_image(self.x_ss, self.left, self.width, self.height)
             else:
                 self.sword_display = pygame.transform.rotate(self.sword, self.i)
                 window.blit(self.sword_display, camera.apply_rect(self.sword_rect))
