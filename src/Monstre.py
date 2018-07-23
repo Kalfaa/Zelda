@@ -9,7 +9,7 @@ class Monstre(Perso):
     def __init__(self, game, x, y):
         Perso.__init__(self, game, x, y)
         self.dir = 1
-        self.direction = "droite"
+        self.direction = "right"
         self.HP_max = 8
         self.HP_Actuel = 1
         self.x_ss = 12
@@ -67,20 +67,20 @@ class Monstre(Perso):
             self.vx = 0
             self.vy = 0
             if direction == 4:
-                self.direction = "haut"
+                self.direction = "up"
                 temp = temp.move(0, -self.vitesse)
                 self.image = self.ss.get_image(self.x_ss, self.haut, self.rect.width, self.rect.height)
-                self.vy = -self.game.map.wall_collision(temp, 'haut', self.vitesse)
+                self.vy = -self.game.map.wall_collision(temp, 'up', self.vitesse)
                 self.rect = temp
                 if self.x_ss == 41:
                     self.x_ss = 12
                 else:
                     self.x_ss = 41
             elif direction == 1:
-                self.direction = "droite"
+                self.direction = "right"
                 temp = temp.move(+self.vitesse, 0)
                 self.image = self.ss.get_image(self.x_ss, self.droite, self.rect.width, self.rect.height)
-                self.vx = self.game.map.wall_collision(temp, 'droite', self.vitesse)
+                self.vx = self.game.map.wall_collision(temp, 'right', self.vitesse)
                 self.rect = temp
                 print(self.x_ss)
                 if self.x_ss == 39:
@@ -88,20 +88,20 @@ class Monstre(Perso):
                 else:
                     self.x_ss = 39
             elif direction == 2:
-                self.direction = "bas"
+                self.direction = "down"
                 temp = temp.move(0, +self.vitesse)
                 self.image = self.ss.get_image(self.x_ss, self.bas, self.rect.width, self.rect.height)
-                self.vy = self.game.map.wall_collision(temp, 'bas', self.vitesse)
+                self.vy = self.game.map.wall_collision(temp, 'down', self.vitesse)
                 self.rect = temp
                 if self.x_ss == 39:
                     self.x_ss = 11
                 else:
                     self.x_ss = 39
             elif direction == 3:
-                self.direction = "gauche"
+                self.direction = "left"
                 temp = temp.move(-self.vitesse, 0)
                 self.image = self.ss.get_image(self.x_ss, self.gauche, self.rect.width, self.rect.height)
-                self.vx = -self.game.map.wall_collision(temp, 'gauche', self.vitesse)
+                self.vx = -self.game.map.wall_collision(temp, 'left', self.vitesse)
                 self.rect = temp
                 if self.x_ss == 39:
                     self.x_ss = 12
