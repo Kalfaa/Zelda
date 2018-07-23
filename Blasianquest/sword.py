@@ -1,7 +1,6 @@
 import pygame
 
-from pygame.locals import *
-from Perso import SpriteSheet
+from src.Perso import SpriteSheet
 
 pygame.init()
 fenetre = pygame.display.set_mode((640, 480))

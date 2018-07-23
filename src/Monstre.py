@@ -1,7 +1,8 @@
-import pygame
 import random
 
-from Perso import Perso
+import pygame
+
+from src.Perso import Perso
 
 
 class Monstre(Perso):

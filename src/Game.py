@@ -1,12 +1,10 @@
-import pygame
-from pygame.locals import *
-
 from Camera import Camera
-from Monstre import Monstre
-from Perso import *
 from Carte import *
-import time
+from pygame.locals import *
 from pytmx.util_pygame import load_pygame
+
+from src.Monstre import Monstre
+from src.Perso import *
 
 
 class Game:

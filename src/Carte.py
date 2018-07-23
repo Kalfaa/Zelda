@@ -1,9 +1,11 @@
-import pytmx
 from math import *
-from Interactif import *
-from Item import *
+
+import pytmx
 from Obstacle import Obstacle
 from SpriteSheet import SpriteSheet
+
+from src.Interactif import *
+from src.Item import *
 
 
 class Carte:
@@ -40,9 +42,9 @@ class Carte:
         self.list_wall[y][x].append(Rect.name)
         rajout_ligne_y = 0
         rajout_ligne_x = 0
-        if ((Rect.y + Rect.height) % 16 != 0):
+        if (Rect.y + Rect.height) % 16 != 0:
             rajout_ligne_y = 1
-        if ((Rect.x + Rect.width) % 16 != 0):
+        if (Rect.x + Rect.width) % 16 != 0:
             rajout_ligne_x = 1
         for j in range(ceil(height / 16 + rajout_ligne_y)):
             self.list_wall[y][x].append(Obstacle(Rect))
@@ -79,7 +81,7 @@ class Carte:
             self.ajouter_item(item.obj, item)
             self.item.append(item)
 
-    def afficher_carte(self, surface):
+    def display_map(self, surface):
         ti = self.tiledElement.get_tile_image_by_gid
         for layer in self.tiledElement.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
@@ -90,11 +92,10 @@ class Carte:
 
     def make_map(self):
         temp_surface = pygame.Surface((self.width * 16, self.height * 16))
-        self.afficher_carte(temp_surface)
+        self.display_map(temp_surface)
         return temp_surface
 
     def wall_collision(self, rect1, direction=0, vitesse=5):
-        wallcollide = 0
         list_coin = list()
         posy = rect1.y
         posx = rect1.x
@@ -158,7 +159,7 @@ class Carte:
         if direction == 'up':
             rect1 = rect1.move(0, +vitesse)
             for Wall in list_coin:
-                espace = (rect1.y) - (Wall.y + Wall.height)
+                espace = rect1.y - (Wall.y + Wall.height)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
 
@@ -166,7 +167,7 @@ class Carte:
         if direction == 'left':
             rect1 = rect1.move(+vitesse, 0)
             for Wall in list_coin:
-                espace = (rect1.x) - (Wall.x + Wall.width)
+                espace = rect1.x - (Wall.x + Wall.width)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
 
@@ -174,7 +175,7 @@ class Carte:
         if direction == 'down':
             rect1 = rect1.move(0, -vitesse)
             for Wall in list_coin:
-                espace = (Wall.y) - (rect1.y + rect1.height)
+                espace = Wall.y - (rect1.y + rect1.height)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
             # print(espace_min)
@@ -184,7 +185,7 @@ class Carte:
     def item_collide(self, rect, direction):
         posy = rect.y
         posx = rect.x
-        wall_h = self.list_item[((posy) // 16) - 1][int((posx + rect.width / 2) // 16)]
+        wall_h = self.list_item[(posy // 16) - 1][int((posx + rect.width / 2) // 16)]
         rect = rect.move(0, -5)
         for item in wall_h:
             if item != 0:

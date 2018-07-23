@@ -1,4 +1,4 @@
-from Interactif import *
+from src.Interactif import *
 
 
 class Perso(pygame.sprite.Sprite):
