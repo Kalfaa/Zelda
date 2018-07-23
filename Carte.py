@@ -57,9 +57,9 @@ class Carte:
         height = ceil(Rect.height)
         rajout_ligne_y = 0
         rajout_ligne_x = 0
-        if ((Rect.y + Rect.height) % 16 != 0):
+        if (Rect.y + Rect.height) % 16 != 0:
             rajout_ligne_y = 1
-        if ((Rect.x + Rect.width) % 16 != 0):
+        if (Rect.x + Rect.width) % 16 != 0:
             rajout_ligne_x = 1
         for j in range(ceil(height / 16 + rajout_ligne_y)):
             self.list_item[y][x].append(item)
@@ -93,101 +93,102 @@ class Carte:
         self.afficher_carte(temp_surface)
         return temp_surface
 
-    def wall_collision(self, Rect1, direction=0, vitesse=5):
+    def wall_collision(self, rect1, direction=0, vitesse=5):
         wallcollide = 0
         list_coin = list()
-        posy = Rect1.y
-        posx = Rect1.x
+        posy = rect1.y
+        posx = rect1.x
 
         wall_hg = self.liste_wall[(posy) // 16][posx // 16]  # Haut Gauche
-        wall_hd = self.liste_wall[(posy) // 16][(posx + Rect1.width) // 16]  # Haut Droite
-        if ((posx + Rect1.width) - (posx)) > 16:
-            wall_hghd = self.liste_wall[(posy) // 16][(posx + Rect1.width - 16) // 16]
-            for Wall in wall_hghd:
-                if isinstance(Wall, Obstacle):
-                    if Rect1.colliderect(Wall):
-                        list_coin.append(Wall)
-        if ((posy + Rect1.height) - (posy)) > 16:
-            wall_bdhd = self.liste_wall[((posy + Rect1.height) - 16) // 16][(posx + Rect1.width) // 16]
-            for Wall in wall_bdhd:
-                if isinstance(Wall, Obstacle):
-                    if Rect1.colliderect(Wall):
-                        list_coin.append(Wall)
-        if (posy + Rect1.height - (posy)) > 16:
-            wall_hgbg = self.liste_wall[((posy + Rect1.height) - 16) // 16][(posx) // 16]
-            for Wall in wall_hgbg:
-                if isinstance(Wall, Obstacle):
-                    if Rect1.colliderect(Wall):
-                        list_coin.append(Wall)
-        wall_bg = self.liste_wall[(posy + Rect1.height) // 16][(posx) // 16]  # Bas Gauche
-        wall_bd = self.liste_wall[(posy + Rect1.height) // 16][(posx + Rect1.width) // 16]  # Bas droite
-        if ((posx + Rect1.width) - posx) > 16:
-            wall_bdbg = self.liste_wall[(posy + Rect1.height) // 16][((posx + Rect1.width) - 16) // 16]
-            for Wall in wall_bdbg:
-                if isinstance(Wall, Obstacle):
-                    if Rect1.colliderect(Wall):
-                        list_coin.append(Wall)
+        wall_hd = self.liste_wall[(posy) // 16][(posx + rect1.width) // 16]  # Haut Droite
+        wall_bg = self.liste_wall[(posy + rect1.height) // 16][(posx) // 16]  # Bas Gauche
+        wall_bd = self.liste_wall[(posy + rect1.height) // 16][(posx + rect1.width) // 16]  # Bas droite
+        ##if ((posx + Rect1.width) - (posx)) > 16:
+          ##  wall_hghd = self.liste_wall[(posy) // 16][(posx + Rect1.width - 16) // 16]
+            ##for Wall in wall_hghd:
+              ##if isinstance(Wall, Obstacle):
+                ##    if Rect1.colliderect(Wall):
+                  ##      list_coin.append(Wall)
+       ## if ((posy + Rect1.height) - (posy)) > 16:
+         ##   wall_bdhd = self.liste_wall[((posy + Rect1.height) - 16) // 16][(posx + Rect1.width) // 16]
+          ##  for Wall in wall_bdhd:
+            ##    if isinstance(Wall, Obstacle):
+              ##      if Rect1.colliderect(Wall):
+                ##        list_coin.append(Wall)
+       ## if (posy + Rect1.height - (posy)) > 16:
+           ## wall_hgbg = self.liste_wall[((posy + Rect1.height) - 16) // 16][(posx) // 16]
+            ##for Wall in wall_hgbg:
+               ## if isinstance(Wall, Obstacle):
+                ##    if Rect1.colliderect(Wall):
+                  ##      list_coin.append(Wall)
+
+        ##if ((posx + Rect1.width) - posx) > 16:
+          ##  wall_bdbg = self.liste_wall[(posy + Rect1.height) // 16][((posx + Rect1.width) - 16) // 16]
+            ##for Wall in wall_bdbg:
+              ##  if isinstance(Wall, Obstacle):
+                ##    if Rect1.colliderect(Wall):
+                  ##      list_coin.append(Wall)
         for Wall in wall_hg:
             if isinstance(Wall, Obstacle):
-                if Rect1.colliderect(Wall):
+                if rect1.colliderect(Wall):
                     list_coin.append(Wall)
         for Wall in wall_bd:
             if isinstance(Wall, Obstacle):
-                if Rect1.colliderect(Wall):
+                if rect1.colliderect(Wall):
                     list_coin.append(Wall)
         for Wall in wall_bg:
             if isinstance(Wall, Obstacle):
-                if Rect1.colliderect(Wall):
+                if rect1.colliderect(Wall):
                     list_coin.append(Wall)
         for Wall in wall_hd:
             if isinstance(Wall, Obstacle):
-                if Rect1.colliderect(Wall):
+                if rect1.colliderect(Wall):
                     list_coin.append(Wall)
         liste_espace = []
         if len(list_coin) == 0:
             return vitesse
         if direction == 'droite':
-            Rect1 = Rect1.move(-vitesse, 0)
+            rect1 = rect1.move(-vitesse, 0)
             for Wall in list_coin:
-                espace = Wall.x - (Rect1.x + Rect1.width)
+                espace = Wall.x - (rect1.x + rect1.width)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
 
             return espace_min
         if direction == 'haut':
-            Rect1 = Rect1.move(0, +vitesse)
+            rect1 = rect1.move(0, +vitesse)
             for Wall in list_coin:
-                espace = (Rect1.y) - (Wall.y + Wall.height)
+                espace = (rect1.y) - (Wall.y + Wall.height)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
 
             return espace_min
         if direction == 'gauche':
-            Rect1 = Rect1.move(+vitesse, 0)
+            rect1 = rect1.move(+vitesse, 0)
             for Wall in list_coin:
-                espace = (Rect1.x) - (Wall.x + Wall.width)
+                espace = (rect1.x) - (Wall.x + Wall.width)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
 
             return espace_min
         if direction == 'bas':
-            Rect1 = Rect1.move(0, -vitesse)
+            rect1 = rect1.move(0, -vitesse)
             for Wall in list_coin:
-                espace = (Wall.y) - (Rect1.y + Rect1.height)
+                espace = (Wall.y) - (rect1.y + rect1.height)
                 liste_espace.append(espace)
             espace_min = min(liste_espace)
             # print(espace_min)
             return espace_min
         return vitesse
 
-    def item_collide(self, Rect, direction):
-        posy = Rect.y
-        posx = Rect.x
-        WALL_H = self.list_item[((posy) // 16) - 1][int((posx + Rect.width / 2) // 16)]
-        Rect = Rect.move(0, -5)
-        for item in WALL_H:
+    def item_collide(self, rect, direction):
+        posy = rect.y
+        posx = rect.x
+        wall_h = self.list_item[((posy) // 16) - 1][int((posx + rect.width / 2) // 16)]
+        rect = rect.move(0, -5)
+        for item in wall_h:
             if item != 0:
-                if Rect.colliderect(item.rect):
+                if rect.colliderect(item.rect):
                     return item
         return False
 
