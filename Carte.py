@@ -9,26 +9,26 @@ from SpriteSheet import SpriteSheet
 class Carte:
     def __init__(self, TiledElement, WINDOW):
         self.WINDOW = WINDOW
-        self.TiledElement = TiledElement
-        self.hauteur = TiledElement.height
-        self.largeur = TiledElement.width
-        self.liste_wall = self.__creer_tableau()
-        self.list_item = self.__creer_tableau()
+        self.tiledElement = TiledElement
+        self.height = TiledElement.height
+        self.width = TiledElement.width
+        self.list_wall = self.__create_list()
+        self.list_item = self.__create_list()
         self.item = list()
         self.item_ss = SpriteSheet('SPRITE/Sprite_Item.png')
-        self.remplir_tableau()
+        self.fill_list()
 
-    def __creer_tableau(self):
+    def __create_list(self):
         l = []
-        for i in range(self.hauteur):
-            l.append([0] * (self.largeur + 2))
+        for i in range(self.height):
+            l.append([0] * (self.width + 2))
 
-        for i in range(self.hauteur):
-            for z in range(self.largeur + 2):
+        for i in range(self.height):
+            for z in range(self.width + 2):
                 l[i][z] = [0]
         return l
 
-    def afficher_tab(self, liste):
+    def display_list(self, liste):
         for i in range(len(liste)):
             print(liste[i])
 
@@ -37,7 +37,7 @@ class Carte:
         y = int(Rect.y) // 16
         width = ceil(Rect.width)
         height = ceil(Rect.height)
-        self.liste_wall[y][x].append(Rect.name)
+        self.list_wall[y][x].append(Rect.name)
         rajout_ligne_y = 0
         rajout_ligne_x = 0
         if ((Rect.y + Rect.height) % 16 != 0):
@@ -45,10 +45,10 @@ class Carte:
         if ((Rect.x + Rect.width) % 16 != 0):
             rajout_ligne_x = 1
         for j in range(ceil(height / 16 + rajout_ligne_y)):
-            self.liste_wall[y][x].append(Obstacle(Rect))
+            self.list_wall[y][x].append(Obstacle(Rect))
             for i in range(ceil(width / 16 + rajout_ligne_x)):
-                self.liste_wall[y + j][x + i].append(Obstacle(Rect))
-                self.liste_wall[y + j][x + i + 1].append(Obstacle(Rect))
+                self.list_wall[y + j][x + i].append(Obstacle(Rect))
+                self.list_wall[y + j][x + i + 1].append(Obstacle(Rect))
 
     def ajouter_item(self, Rect, item):
         x = int(Rect.x) // 16
@@ -67,21 +67,21 @@ class Carte:
                 self.list_item[y + j][x + i].append(item)
                 self.list_item[y + j][x + i + 1].append(item)
 
-    def remplir_tableau(self):
-        for obj in self.TiledElement.objects:
+    def fill_list(self):
+        for obj in self.tiledElement.objects:
             print(obj.name, obj.x, obj.y)
 
             if obj.name != None:
                 self.ajouter_obstacle(obj)
-        for obj in self.TiledElement.get_layer_by_name('Coffre'):
+        for obj in self.tiledElement.get_layer_by_name('Coffre'):
             item = Coffre(obj, pygame.image.load('SPRITE/chest.png'),
                           Item('Sword', self.item_ss.get_image(9, 9, 14, 14)))
             self.ajouter_item(item.obj, item)
             self.item.append(item)
 
     def afficher_carte(self, surface):
-        ti = self.TiledElement.get_tile_image_by_gid
-        for layer in self.TiledElement.visible_layers:
+        ti = self.tiledElement.get_tile_image_by_gid
+        for layer in self.tiledElement.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid, in layer:
                     tile = ti(gid)
@@ -89,7 +89,7 @@ class Carte:
                         surface.blit(tile, (x * 16, y * 16))
 
     def make_map(self):
-        temp_surface = pygame.Surface((self.largeur * 16, self.hauteur * 16))
+        temp_surface = pygame.Surface((self.width * 16, self.height * 16))
         self.afficher_carte(temp_surface)
         return temp_surface
 
@@ -99,10 +99,10 @@ class Carte:
         posy = rect1.y
         posx = rect1.x
 
-        wall_hg = self.liste_wall[(posy) // 16][posx // 16]  # Haut Gauche
-        wall_hd = self.liste_wall[(posy) // 16][(posx + rect1.width) // 16]  # Haut Droite
-        wall_bg = self.liste_wall[(posy + rect1.height) // 16][(posx) // 16]  # Bas Gauche
-        wall_bd = self.liste_wall[(posy + rect1.height) // 16][(posx + rect1.width) // 16]  # Bas droite
+        wall_hg = self.list_wall[(posy) // 16][posx // 16]  # Haut Gauche
+        wall_hd = self.list_wall[(posy) // 16][(posx + rect1.width) // 16]  # Haut Droite
+        wall_bg = self.list_wall[(posy + rect1.height) // 16][(posx) // 16]  # Bas Gauche
+        wall_bd = self.list_wall[(posy + rect1.height) // 16][(posx + rect1.width) // 16]  # Bas droite
         ##if ((posx + Rect1.width) - (posx)) > 16:
           ##  wall_hghd = self.liste_wall[(posy) // 16][(posx + Rect1.width - 16) // 16]
             ##for Wall in wall_hghd:

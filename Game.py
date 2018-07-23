@@ -11,7 +11,7 @@ from pytmx.util_pygame import load_pygame
 
 class Game:
     def __init__(self):
-        self.list_monstre = list()
+        self.monster_list = list()
         self.all_sprites = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         self.FPS = 60
@@ -60,10 +60,10 @@ class Game:
         now = pygame.time.get_ticks()
         if self.Link.checkIfDead():
             self.playing = False
-        self.Link.update(self.event, self.list_monstre, now)
-        for monstre in self.list_monstre:
+        self.Link.update(self.event, self.monster_list, now)
+        for monstre in self.monster_list:
             if monstre.checkIfDead():
-                self.list_monstre.remove(monstre)
+                self.monster_list.remove(monstre)
                 self.all_sprites.remove(monstre)
             else:
                 monstre.update(now)
@@ -79,7 +79,7 @@ class Game:
         if self.debuglink:
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.rect))
             pygame.draw.rect(self.WINDOW, pygame.Color('red'), self.camera.apply_rect(self.Link.sword_rect))
-            for monstre in self.list_monstre:
+            for monstre in self.monster_list:
                 pygame.draw.rect(self.WINDOW, pygame.Color('red'),
                                  self.camera.apply_rect(monstre.rect))  # debug link hitbox
         self.afficher_coeur()
@@ -178,12 +178,12 @@ class Game:
 
     def new(self):
         self.Link = Hero(self, 255 / 16, 49 / 16)
-        self.list_monstre.append(Monstre(self, 255 / 16, 180 / 16))
+        self.monster_list.append(Monstre(self, 255 / 16, 180 / 16))
         self.all_sprites.add(self.Link)
-        for monstre in self.list_monstre:
+        for monstre in self.monster_list:
             self.all_sprites.add(monstre)
-        self.camera = Camera(self.map.largeur * 16, self.map.hauteur * 16)
-        self.map.afficher_tab(self.map.list_item)
+        self.camera = Camera(self.map.width * 16, self.map.height * 16)
+        self.map.display_list(self.map.list_item)
         for item in self.map.item:
             self.all_sprites.add(item)
         pygame.init()

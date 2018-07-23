@@ -5,8 +5,8 @@ class Perso(pygame.sprite.Sprite):
     liste_vivant = list()
 
     def __creer_tableau(liste_vivant, map):
-        for i in range(map.hauteur):
-            liste_vivant.append([0] * map.largeur)
+        for i in range(map.height):
+            liste_vivant.append([0] * map.width)
         return liste_vivant
 
     __creer_tableau = staticmethod(__creer_tableau)
