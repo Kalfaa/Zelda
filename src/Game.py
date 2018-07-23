@@ -189,7 +189,7 @@ class Game:
         pygame.init()
 
     def debug_collision(self, mapgame):
-        for obj in mapgame.TiledElement.objects:
+        for obj in mapgame.tiledElement.objects:
             if obj.name is not None:
                 rect = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
                 pygame.draw.rect(self.WINDOW, pygame.Color("green"), self.camera.apply_rect(rect))
