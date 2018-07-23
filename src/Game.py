@@ -3,8 +3,10 @@ from Carte import *
 from pygame.locals import *
 from pytmx.util_pygame import load_pygame
 
+from src.Carte import Carte
 from src.Monstre import Monstre
 from src.Perso import *
+from src.SpriteSheet import SpriteSheet
 
 
 class Game:
